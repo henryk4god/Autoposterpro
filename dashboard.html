@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - AutoPoster</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+</head>
+<body class="dashboard-page">
+    <!-- Navigation -->
+    <nav class="dashboard-nav">
+        <div class="nav-brand">
+            <img src="assets/images/logo.svg" alt="AutoPostr" class="logo">
+            <span class="brand-name">AutoPoster</span>
+        </div>
+        
+        <div class="nav-user">
+            <div class="user-info">
+                <span class="user-email" id="userEmail">user@example.com</span>
+                <span class="user-plan badge trial" id="userPlan">Trial</span>
+            </div>
+            <button id="logoutBtn" class="btn btn-text">Logout</button>
+        </div>
+    </nav>
+
+    <!-- Main Layout -->
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <a href="#overview" class="nav-item active" data-section="overview">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Overview</span>
+                </a>
+                <a href="#schedule" class="nav-item" data-section="schedule">
+                    <span class="nav-icon">⏰</span>
+                    <span class="nav-text">Schedule Post</span>
+                </a>
+                <a href="#platforms" class="nav-item" data-section="platforms">
+                    <span class="nav-icon">🔗</span>
+                    <span class="nav-text">Connected Platforms</span>
+                </a>
+                <a href="#posts" class="nav-item" data-section="posts">
+                    <span class="nav-icon">📝</span>
+                    <span class="nav-text">Post History</span>
+                </a>
+                <a href="#analytics" class="nav-item" data-section="analytics">
+                    <span class="nav-icon">📈</span>
+                    <span class="nav-text">Analytics</span>
+                </a>
+                <a href="#account" class="nav-item" data-section="account">
+                    <span class="nav-icon">👤</span>
+                    <span class="nav-text">Account</span>
+                </a>
+            </nav>
+            
+            <!-- Upgrade Banner -->
+            <div class="upgrade-banner">
+                <h4>Upgrade to Pro</h4>
+                <p>Get unlimited posts and advanced features</p>
+                <a href="#" class="btn btn-primary btn-small">Upgrade Now</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Notification Area -->
+            <div id="notification" class="notification hidden"></div>
+
+            <!-- Overview Section -->
+            <section id="overview" class="dashboard-section active">
+                <div class="section-header">
+                    <h1>Dashboard Overview</h1>
+                    <p>Welcome back! Here's your social media performance summary.</p>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon primary">📊</div>
+                        <div class="stat-content">
+                            <span class="stat-value" id="totalPosts">0</span>
+                            <span class="stat-label">Total Posts</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon success">✅</div>
+                        <div class="stat-content">
+                            <span class="stat-value" id="successRate">0%</span>
+                            <span class="stat-label">Success Rate</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card">
+                            <div class="stat-icon warning">⏳</div>
+                            <div class="stat-content">
+                                <span class="stat-value" id="pendingPosts">0</span>
+                                <span class="stat-label">Pending Posts</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon info">🔗</div>
+                        <div class="stat-content">
+                            <span class="stat-value" id="connectedPlatforms">0</span>
+                            <span class="stat-label">Connected Platforms</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h3>Quick Actions</h3>
+                    <div class="actions-grid">
+                        <button class="action-card" data-section="schedule">
+                            <span class="action-icon">➕</span>
+                            <span class="action-text">Schedule New Post</span>
+                        </button>
+                        <button class="action-card" data-section="platforms">
+                            <span class="action-icon">🔗</span>
+                            <span class="action-text">Connect Platform</span>
+                        </button>
+                        <button class="action-card" data-section="posts">
+                            <span class="action-icon">📝</span>
+                            <span class="action-text">View Post History</span>
+                        </button>
+                        <button class="action-card" onclick="refreshDashboard()">
+                            <span class="action-icon">🔄</span>
+                            <span class="action-text">Refresh Data</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="recent-activity">
+                    <h3>Recent Activity</h3>
+                    <div class="activity-list" id="recentActivity">
+                        <!-- Activity items will be loaded here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Schedule Post Section -->
+            <section id="schedule" class="dashboard-section">
+                <div class="section-header">
+                    <h1>Schedule New Post</h1>
+                    <p>Create and schedule posts across your connected platforms</p>
+                </div>
+
+                <form id="scheduleForm" class="schedule-form">
+                    <div class="form-grid">
+                        <!-- Platform Selection -->
+                        <div class="form-group">
+                            <label for="platform" class="form-label">Platform</label>
+                            <select id="platform" name="platform" class="form-select" required>
+                                <option value="">Select Platform</option>
+                                <option value="telegram">Telegram</option>
+                                <option value="facebook">Facebook</option>
+                                <option value="twitter">Twitter</option>
+                                <option value="instagram">Instagram</option>
+                                <option value="linkedin">LinkedIn</option>
+                            </select>
+                            <div class="form-hint" id="platformHint">
+                                Make sure you've connected this platform first
+                            </div>
+                        </div>
+
+                        <!-- Schedule Time -->
+                        <div class="form-group">
+                            <label for="scheduleTime" class="form-label">Schedule Time</label>
+                            <input 
+                                type="datetime-local" 
+                                id="scheduleTime" 
+                                name="scheduleTime" 
+                                class="form-input" 
+                                required
+                            >
+                            <div class="form-hint">
+                                Posts are checked every 10 minutes
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Message Content -->
+                    <div class="form-group">
+                        <label for="message" class="form-label">Message Content</label>
+                        <textarea 
+                            id="message" 
+                            name="message" 
+                            class="form-textarea" 
+                            placeholder="Write your post content here..."
+                            rows="5"
+                            maxlength="4000"
+                            required
+                        ></textarea>
+                        <div class="form-meta">
+                            <span class="char-count">0/4000 characters</span>
+                        </div>
+                    </div>
+
+                    <!-- Media URL -->
+                    <div class="form-group">
+                        <label for="mediaUrl" class="form-label">Media URL (Optional)</label>
+                        <input 
+                            type="url" 
+                            id="mediaUrl" 
+                            name="mediaUrl" 
+                            class="form-input" 
+                            placeholder="https://example.com/image.jpg"
+                        >
+                        <div class="form-hint">
+                            Supported: JPG, PNG, GIF, MP4, YouTube links
+                        </div>
+                    </div>
+
+                    <!-- Preview -->
+                    <div class="form-group">
+                        <label class="form-label">Preview</label>
+                        <div class="post-preview" id="postPreview">
+                            <p class="preview-placeholder">Your post preview will appear here...</p>
+                        </div>
+                    </div>
+
+                    <!-- Submit -->
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="previewBtn">
+                            Update Preview
+                        </button>
+                        <button type="submit" class="btn btn-primary" id="scheduleBtn">
+                            <span class="btn-text">Schedule Post</span>
+                            <div class="btn-spinner hidden"></div>
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Connected Platforms Section -->
+            <section id="platforms" class="dashboard-section">
+                <div class="section-header">
+                    <h1>Connected Platforms</h1>
+                    <p>Manage your social media platform connections</p>
+                </div>
+
+                <!-- Platform Connection Form -->
+                <div class="connection-form-container">
+                    <h3>Connect New Platform</h3>
+                    <form id="connectionForm" class="connection-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="connectPlatform" class="form-label">Platform</label>
+                                <select id="connectPlatform" name="platform" class="form-select" required>
+                                    <option value="">Select Platform</option>
+                                    <option value="telegram">Telegram</option>
+                                    <option value="facebook">Facebook</option>
+                                    <option value="twitter">Twitter</option>
+                                    <option value="instagram">Instagram</option>
+                                    <option value="linkedin">LinkedIn</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Dynamic Form Fields -->
+                        <div id="platformFields">
+                            <!-- Fields will be loaded based on platform selection -->
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary" id="connectBtn">
+                                <span class="btn-text">Connect Platform</span>
+                                <div class="btn-spinner hidden"></div>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Connected Platforms List -->
+                <div class="connected-platforms">
+                    <h3>Your Connected Platforms</h3>
+                    <div class="platforms-grid" id="platformsList">
+                        <!-- Platforms will be loaded here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- More sections would continue... -->
+
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+</body>
+</html>
