@@ -1,0 +1,223 @@
+/* auth.css - Authentication Pages */
+.auth-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--primary-50) 0%, var(--gray-50) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-6);
+}
+
+.auth-container {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+}
+
+.auth-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: var(--space-8);
+    position: relative;
+    z-index: 10;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: var(--space-8);
+}
+
+.auth-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--gray-900);
+    text-decoration: none;
+    margin-bottom: var(--space-6);
+}
+
+.auth-logo img {
+    width: 32px;
+    height: 32px;
+}
+
+.auth-header h1 {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--space-2);
+}
+
+.auth-header p {
+    color: var(--gray-600);
+    font-size: var(--font-size-sm);
+}
+
+.auth-form {
+    margin-bottom: var(--space-6);
+}
+
+.form-terms {
+    margin: var(--space-6) 0;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    font-size: var(--font-size-sm);
+    color: var(--gray-700);
+    cursor: pointer;
+}
+
+.checkbox-label input {
+    margin-top: var(--space-1);
+}
+
+.checkmark {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--gray-300);
+    border-radius: var(--radius-sm);
+    position: relative;
+    flex-shrink: 0;
+}
+
+.checkbox-label input:checked + .checkmark {
+    background-color: var(--primary-600);
+    border-color: var(--primary-600);
+}
+
+.checkbox-label input:checked + .checkmark::after {
+    content: '✓';
+    position: absolute;
+    color: white;
+    font-size: 12px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.auth-links {
+    text-align: center;
+    margin-bottom: var(--space-6);
+}
+
+.auth-links p {
+    margin-bottom: var(--space-3);
+    font-size: var(--font-size-sm);
+    color: var(--gray-600);
+}
+
+.auth-link {
+    color: var(--primary-600);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-link:hover {
+    text-decoration: underline;
+}
+
+.demo-notice {
+    background-color: var(--primary-50);
+    border: 1px solid var(--primary-100);
+    border-radius: var(--radius);
+    padding: var(--space-4);
+    text-align: center;
+    font-size: var(--font-size-sm);
+    color: var(--primary-700);
+}
+
+.trial-features {
+    background-color: var(--gray-50);
+    border-radius: var(--radius);
+    padding: var(--space-4);
+    margin-top: var(--space-6);
+}
+
+.trial-features h4 {
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-3);
+    color: var(--gray-700);
+}
+
+.trial-features ul {
+    list-style: none;
+    font-size: var(--font-size-sm);
+    color: var(--gray-600);
+}
+
+.trial-features li {
+    margin-bottom: var(--space-2);
+}
+
+/* Background Animation */
+.auth-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.floating-shape {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--primary-100), var(--primary-50));
+    opacity: 0.6;
+    animation: float 20s infinite linear;
+}
+
+.shape-1 {
+    width: 200px;
+    height: 200px;
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.shape-2 {
+    width: 150px;
+    height: 150px;
+    top: 60%;
+    right: 10%;
+    animation-delay: -5s;
+}
+
+.shape-3 {
+    width: 100px;
+    height: 100px;
+    bottom: 20%;
+    left: 20%;
+    animation-delay: -10s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-20px) rotate(90deg);
+    }
+    50% {
+        transform: translateY(0px) rotate(180deg);
+    }
+    75% {
+        transform: translateY(20px) rotate(270deg);
+    }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .auth-card {
+        padding: var(--space-6);
+    }
+    
+    .auth-container {
+        max-width: 100%;
+    }
+}
